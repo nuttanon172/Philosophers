@@ -6,14 +6,11 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:36:25 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/09/24 17:47:50 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/09/30 18:42:15 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	philosopher()
-{
-	
-}
+#include "philo.h"
 
 int	main(void)
 {

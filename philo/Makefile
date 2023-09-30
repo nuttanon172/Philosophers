@@ -4,7 +4,7 @@ CC	=	cc
 
 CFLAGS	=	-Wall -Wextra -Werror -I$(DIR_INC)
 
-SRCS	=	
+SRCS	=	init_philo.c	
 
 DIR_INC	=	include
 DIR_SRC	=	src
