@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:37:44 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/09/30 13:35:46 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/01 14:23:38 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,14 @@ size_t	ft_atost(const char *nptr)
 		nptr++;
 	}
 	return (total);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
