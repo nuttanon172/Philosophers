@@ -2,9 +2,15 @@ NAME	=	philo
 
 CC	=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -I$(DIR_INC)
+CFLAGS	=	-Wall -Wextra -Werror
 
-SRCS	=	init_philo.c	
+SRCS	=	action.c \
+			ft_free.c \
+			ft_time.c \
+			init_philo.c \
+			main.c \
+			routine.c \
+			utils.c
 
 DIR_INC	=	include
 DIR_SRC	=	src
@@ -12,7 +18,7 @@ DIR_SRC	=	src
 RM	=	rm -rf
 
 $(NAME):
-	@$(CC) $(CFLAGS) $(addprefix $(DIR_SRC)/, $(SRCS)) -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 .PHONY: all clean fclean re norm
 all: $(NAME)
@@ -30,5 +36,5 @@ re: fclean all
 
 norm:
 	@echo "------------------- Philo -------------------"
-	@norminette $(DIR_INC) $(DIR_SRC)
+	@norminette $(SRCS)
 	@echo "-------------------------------------------\n"

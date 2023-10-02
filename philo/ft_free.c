@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:54 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/01 14:20:11 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 10:41:40 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 void	exit_free(t_prog *prog, char *str)
 {
-	print("Ez\n");
+	printf("Ez\n");
 }

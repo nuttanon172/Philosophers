@@ -10,5 +10,8 @@ int main()
 	printf("%sdied\n", RED);
 	printf("%seat\n", GREEN);
 	printf("%sthink\n", YELLOW);
-	printf("%ssleep\n", BLUE); 
+	printf("%ssleep\n", BLUE);
+	size_t a = -1;
+	printf("-1 = %zu\n", a);
+	printf("-1 = %zu\n", a + 1);
 }

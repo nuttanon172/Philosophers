@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/01 17:20:15 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 10:46:26 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,16 @@
 
 typedef struct s_philo
 {
+	pthread_t		thread;
 	int				status;
 	int				id;
 	int				eat_count;
-	int				total_eat;
+	int				max_eat;
 	size_t			last_eat;
 	size_t			eat_time;
 	size_t			sleep_time;
 	size_t			die_time;
-	pthread_t		thread;
+	size_t			start_time;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*print;
@@ -43,7 +44,7 @@ typedef struct s_philo
 typedef struct s_prog
 {
 	int				nphilo;
-	int				total_eat;
+	int				max_eat;
 	size_t			eat_time;
 	size_t			sleep_time;
 	size_t			die_time;
@@ -57,12 +58,16 @@ void	fork_init(t_prog *prog);
 void	philo_init(t_prog *prog);
 void	thread_init(t_prog *prog);
 
+/* routine */
+void	monitor(t_prog *prog);
+void	routine(t_philo *philo);
+
 /* ft_time */
 size_t	get_current_time(void);
 void	ft_sleep(size_t millisec);
 
 /* action */
-void	print(t_philo *philo, int id, char *str);
+void	print(t_philo *philo, char *str, char *color);
 void	eat(t_philo *philo);
 void	nap(t_philo *philo);
 void	think(t_philo *philo);
@@ -70,5 +75,6 @@ void	think(t_philo *philo);
 /* utils */
 size_t	ft_atost(const char *nptr);
 size_t	ft_strlen(const char *s);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
