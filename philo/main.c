@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 16:36:25 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/01 23:08:13 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 16:33:58 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int	main(int ac, char **av)
 	prog_init(&prog, ac, av);
 	philo_init(&prog);
 	fork_init(&prog);
+	thread_init(&prog);
 	return (EXIT_SUCCESS);
 }

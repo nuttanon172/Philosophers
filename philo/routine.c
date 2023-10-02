@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 10:28:44 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:05:42 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ static int	ft_isdie(t_philo *philo)
 		return (0);
 }
 
-void	monitor(t_prog *prog)
+void	*monitor(void *var)
 {
+	t_prog	*prog;
 	int	i;
 
-	i = 0;
+ 	i = 0;
+	prog = (t_prog *)var;
 	ft_sleep(1);
 	while (1)
 	{
@@ -53,16 +55,23 @@ void	monitor(t_prog *prog)
 				break ;
 		i = 0;
 	}
+	return (0);
 }
 
-void	routine(t_philo *philo)
+void	*routine(void *var)
 {
+	t_philo	*philo;
+
+	philo = var;
 	if (philo->id % 2 == 0)
-		ft_sleep(1);
+		usleep(10);
 	while (!ft_isdie(philo))
 	{
 		eat(philo);
 		nap(philo);
 		think(philo);
 	}
+	if (ft_isdie(philo))
+		print(philo, "is died", RED);
+	return (0);
 }

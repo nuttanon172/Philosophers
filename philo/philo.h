@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 10:46:26 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 17:00:43 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 typedef struct s_philo
 {
 	pthread_t		thread;
-	int				status;
+	int				*status;
 	int				id;
 	int				eat_count;
 	int				max_eat;
@@ -45,11 +45,12 @@ typedef struct s_prog
 {
 	int				nphilo;
 	int				max_eat;
+	int				status;
 	size_t			eat_time;
 	size_t			sleep_time;
 	size_t			die_time;
-	pthread_mutex_t	*print;
 	t_philo			*philo;
+	pthread_mutex_t	print;
 }				t_prog;
 
 /* init_philo */
@@ -59,8 +60,8 @@ void	philo_init(t_prog *prog);
 void	thread_init(t_prog *prog);
 
 /* routine */
-void	monitor(t_prog *prog);
-void	routine(t_philo *philo);
+void	*monitor(void *var);
+void	*routine(void *var);
 
 /* ft_time */
 size_t	get_current_time(void);
