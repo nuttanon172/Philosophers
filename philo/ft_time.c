@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:41:28 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 16:35:36 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:17:48 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_sleep(size_t millisec)
 	size_t	start;
 
 	start = get_current_time();
-	if (get_current_time() - start < millisec)
+	while (get_current_time() - start < millisec)
 		usleep(2);
 }
 

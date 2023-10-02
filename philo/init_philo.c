@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 17:01:12 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:59:21 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,47 +14,50 @@
 
 void	prog_init(t_prog *prog, int ac, char **av)
 {
-	prog->nphilo = ft_atost(av[1]);
-	if (pthread_mutex_init(&prog->print, NULL) != 0)
-		return ;
+	prog->nphilo = ft_atost(av[1]);	
 	prog->die_time = ft_atost(av[2]);
 	prog->eat_time = ft_atost(av[3]);
 	prog->sleep_time = ft_atost(av[4]);
 	prog->max_eat = -1;
 	prog->status = 1;
+	prog->print = NULL;
+	prog->fork = NULL;
+	prog->philo = NULL;
 	if (ac > 5)
 		prog->max_eat = (int)ft_atost(av[5]);
 	if (!prog->die_time || !prog->eat_time || !prog->sleep_time || \
 	!prog->max_eat)
 		return ;
+	if (pthread_mutex_init(&prog->print, NULL) != 0)
+		return ;
 }
 
 void	fork_init(t_prog *prog)
 {
-	pthread_mutex_t	*fork;
-	int				i;
+	size_t			i;
 
 	i = 0;
-	fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
-	if (!fork)
+	prog->fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
+	if (!prog->fork)
 		return ;
 	while (i < prog->nphilo)
-		if (pthread_mutex_init(&fork[i++], NULL) != 0)
+		if (pthread_mutex_init(&prog->fork[i++], NULL) != 0)
 			return ;
-	prog->philo[0].r_fork = &fork[0];
-	prog->philo[0].l_fork = &fork[prog->nphilo - 1];
-	i = 1;
+	i = 0;
 	while (i < prog->nphilo)
 	{
-		prog->philo[i].r_fork = &fork[i];
-		prog->philo[i].l_fork = &fork[i - 1];
+		prog->philo[i].r_fork = &prog->fork[i];
+		if (i == prog->nphilo - 1)
+			prog->philo[i].l_fork = &prog->fork[0];
+		else
+			prog->philo[i].l_fork = &prog->fork[i + 1];
 		i++;
 	}
 }
 
 void	philo_init(t_prog *prog)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	prog->philo = (t_philo *)malloc(prog->nphilo * sizeof(t_philo));
@@ -79,16 +82,19 @@ void	philo_init(t_prog *prog)
 void	thread_init(t_prog *prog)
 {
 	pthread_t	inspector;
-	int			i;
+	size_t		i;
 
 	if (pthread_create(&inspector, NULL, \
 		&monitor, prog) != 0)
 		return ;
-	i = -1;
-	while (++i < prog->nphilo)
+	i = 0;
+	while (i < prog->nphilo)
+	{
 		if (pthread_create(&prog->philo[i].thread, NULL, \
 			&routine, &prog->philo[i]) != 0)
 			return ;
+		i++;
+	}
 	i = 0;
 	while (i < prog->nphilo)
 		if (pthread_join(prog->philo[i++].thread, NULL) != 0)

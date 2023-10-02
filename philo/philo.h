@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 17:00:43 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:58:25 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ typedef struct s_philo
 
 typedef struct s_prog
 {
-	int				nphilo;
+	size_t 			nphilo;
 	int				max_eat;
 	int				status;
 	size_t			eat_time;
 	size_t			sleep_time;
 	size_t			die_time;
 	t_philo			*philo;
-	pthread_mutex_t	print;
+	pthread_mutex_t	*print;
+	pthread_mutex_t	*fork;
 }				t_prog;
 
 /* init_philo */

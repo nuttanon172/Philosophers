@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:28:44 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 17:07:53 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:44:47 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	think(t_philo *philo)
 {
 	if (!philo->status)
 		return ;
+	printf("%d status = %d\n", philo->id, philo->status);
 	print(philo, "is thinking", YELLOW);
 }

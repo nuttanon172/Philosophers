@@ -3,7 +3,6 @@ NAME	=	philo
 CC	=	cc
 
 CFLAGS	=	-Wall -Wextra -Werror -pthread
-# -fsanitize=address -g
 
 SRCS	=	action.c \
 			ft_free.c \
@@ -27,7 +26,6 @@ all: $(NAME)
 clean:
 		@$(RM) $(NAME)
 		@echo "Philo has Removed"
-
 
 fclean:
 		@$(RM) $(NAME)

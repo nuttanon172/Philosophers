@@ -6,16 +6,16 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 17:05:42 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/02 18:37:02 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static int	full_eat(t_prog *prog)
+static size_t	full_eat(t_prog *prog)
 {
-	int	i;
-	int	full;
+	size_t	i;
+	size_t	full;
 
 	i = 0;
 	full = 0;
@@ -34,6 +34,7 @@ static int	ft_isdie(t_philo *philo)
 	if (get_current_time() - philo->last_eat >= philo->eat_time)
 	{
 		philo->status = 0;
+		print(philo, "is died", RED);
 		return (1);
 	}
 	else
@@ -43,9 +44,9 @@ static int	ft_isdie(t_philo *philo)
 void	*monitor(void *var)
 {
 	t_prog	*prog;
-	int	i;
+	size_t	i;
 
- 	i = 0;
+	i = 0;
 	prog = (t_prog *)var;
 	ft_sleep(1);
 	while (1)
@@ -64,14 +65,14 @@ void	*routine(void *var)
 
 	philo = var;
 	if (philo->id % 2 == 0)
-		usleep(10);
-	while (!ft_isdie(philo))
+		ft_sleep(5);
+	while (1)
 	{
 		eat(philo);
 		nap(philo);
 		think(philo);
+		if (ft_isdie(philo))
+			break ;
 	}
-	if (ft_isdie(philo))
-		print(philo, "is died", RED);
 	return (0);
 }
