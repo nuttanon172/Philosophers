@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:28:44 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 14:31:23 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 16:44:33 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	print(t_philo *philo, char *str, char *color)
 {
-	if (!*philo->status)
-		return ;
+	usleep(2);
 	pthread_mutex_lock(philo->print);
-	printf("%s%zu  ", color, timestamp() - philo->start_time);
-	printf("%d %s\n", philo->id, str);
+	if (*philo->status)
+	{
+		printf("%s%zu  ", color, timestamp() - philo->start_time);
+		printf("%d %s\n", philo->id, str);
+	}
 	pthread_mutex_unlock(philo->print);
 }
 

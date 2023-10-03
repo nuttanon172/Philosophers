@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 14:58:07 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:34:14 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ typedef struct s_prog
 }				t_prog;
 
 /* init_philo */
-void	prog_init(t_prog *prog, int ac, char **av);
-void	fork_init(t_prog *prog);
-void	philo_init(t_prog *prog);
-void	thread_init(t_prog *prog);
+int		prog_init(t_prog *prog, int ac, char **av);
+int		fork_init(t_prog *prog);
+int		philo_init(t_prog *prog);
+int		thread_init(t_prog *prog);
 
 /* routine */
 void	*monitor(void *var);
