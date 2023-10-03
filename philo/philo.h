@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 18:58:25 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 10:22:52 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	*monitor(void *var);
 void	*routine(void *var);
 
 /* ft_time */
-size_t	get_current_time(void);
+size_t	timestamp(void);
 void	ft_sleep(size_t millisec);
 
 /* action */

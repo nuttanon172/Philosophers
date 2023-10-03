@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 18:37:02 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 10:22:18 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,16 @@ static size_t	full_eat(t_prog *prog)
 	return (0);
 }
 
-static int	ft_isdie(t_philo *philo)
+static int	ft_isdie(t_prog *prog)
 {
-	if (get_current_time() - philo->last_eat >= philo->eat_time)
+	size_t	i;
+
+	//printf("last eat = %zu, eat time = %zu\n", timestamp() - philo->last_eat, philo->die_time);
+	i = 0;
+	while (timestamp() - prog->philo->last_eat >= prog->philo[i]->die_time)
 	{
-		philo->status = 0;
-		print(philo, "is died", RED);
+		prog->philo[i]->status = 0;
+		print(prog->philo[i], "died", RED);
 		return (1);
 	}
 	else
@@ -56,7 +60,7 @@ void	*monitor(void *var)
 				break ;
 		i = 0;
 	}
-	return (0);
+	return (var);
 }
 
 void	*routine(void *var)
@@ -71,8 +75,6 @@ void	*routine(void *var)
 		eat(philo);
 		nap(philo);
 		think(philo);
-		if (ft_isdie(philo))
-			break ;
 	}
-	return (0);
+	return (var);
 }

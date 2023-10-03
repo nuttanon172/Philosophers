@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   action.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:28:44 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/02 18:44:47 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 10:10:06 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	eat(t_philo *philo)
 	print(philo, "has taken a fork", GREEN);
 	philo->eat_count += 1;
 	print(philo, "is eating", GREEN);
-	ft_sleep(philo->eat_time);
 	philo->last_eat = get_current_time();
+	ft_sleep(philo->eat_time);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
 }
@@ -48,6 +48,6 @@ void	think(t_philo *philo)
 {
 	if (!philo->status)
 		return ;
-	printf("%d status = %d\n", philo->id, philo->status);
+	//printf("%d status = %d\n", philo->id, philo->status);
 	print(philo, "is thinking", YELLOW);
 }
