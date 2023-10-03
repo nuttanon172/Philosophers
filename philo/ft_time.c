@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_time.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:41:28 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 10:22:38 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 11:42:53 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_sleep(size_t millisec)
 
 	start = timestamp();
 	while (timestamp() - start < millisec)
-		usleep(2);
+		usleep(1);
 }
 
 size_t	timestamp(void)

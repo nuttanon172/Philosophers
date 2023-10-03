@@ -3,14 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 10:22:18 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:24:11 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static size_t	ft_isdie(t_prog *prog)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < prog->nphilo)
+	{
+		if (timestamp() - prog->philo[i].last_eat >= prog->philo[i].die_time)
+		{
+			print(&prog->philo[i], "died", RED);
+			prog->status = 0;
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
 
 static size_t	full_eat(t_prog *prog)
 {
@@ -21,28 +39,13 @@ static size_t	full_eat(t_prog *prog)
 	full = 0;
 	while (i < prog->nphilo)
 	{
-		if (prog->philo->eat_count == prog->philo->max_eat)
+		if (prog->philo[i].eat_count == prog->philo[i].max_eat)
 			full++;
+		i++;
 	}
 	if (full == prog->nphilo)
 		return (1);
 	return (0);
-}
-
-static int	ft_isdie(t_prog *prog)
-{
-	size_t	i;
-
-	//printf("last eat = %zu, eat time = %zu\n", timestamp() - philo->last_eat, philo->die_time);
-	i = 0;
-	while (timestamp() - prog->philo->last_eat >= prog->philo[i]->die_time)
-	{
-		prog->philo[i]->status = 0;
-		print(prog->philo[i], "died", RED);
-		return (1);
-	}
-	else
-		return (0);
 }
 
 void	*monitor(void *var)
@@ -55,10 +58,10 @@ void	*monitor(void *var)
 	ft_sleep(1);
 	while (1)
 	{
-		while (i < prog->nphilo)
-			if (ft_isdie(&prog->philo[i++]) || full_eat(prog))
-				break ;
-		i = 0;
+		if (ft_isdie(prog))
+			break ;
+		if (full_eat(prog))
+			break ;
 	}
 	return (var);
 }
@@ -69,12 +72,14 @@ void	*routine(void *var)
 
 	philo = var;
 	if (philo->id % 2 == 0)
-		ft_sleep(5);
+		ft_sleep(2);
 	while (1)
 	{
 		eat(philo);
 		nap(philo);
 		think(philo);
+		if (!*philo->status || (philo->eat_count == philo->max_eat))
+			break ;
 	}
 	return (var);
 }

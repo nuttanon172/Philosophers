@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 10:22:52 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:26:02 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,14 +43,15 @@ typedef struct s_philo
 
 typedef struct s_prog
 {
-	size_t 			nphilo;
+	size_t			nphilo;
 	int				max_eat;
 	int				status;
+	size_t			start_time;
 	size_t			eat_time;
 	size_t			sleep_time;
 	size_t			die_time;
 	t_philo			*philo;
-	pthread_mutex_t	*print;
+	pthread_mutex_t	print;
 	pthread_mutex_t	*fork;
 }				t_prog;
 

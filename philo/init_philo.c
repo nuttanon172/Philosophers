@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_philo.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ntairatt <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 10:15:56 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 12:27:16 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,22 +20,25 @@ void	prog_init(t_prog *prog, int ac, char **av)
 	prog->sleep_time = ft_atost(av[4]);
 	prog->max_eat = -1;
 	prog->status = 1;
+	prog->start_time = timestamp();
 	prog->philo = NULL;
 	if (ac > 5)
 		prog->max_eat = (int)ft_atost(av[5]);
 	if (!prog->die_time || !prog->eat_time || !prog->sleep_time || \
 	!prog->max_eat)
 		return ;
-	if (pthread_mutex_init(prog->print, NULL) != 0)
+	if (pthread_mutex_init(&prog->print, NULL) != 0)
 		return ;
 }
 
 void	fork_init(t_prog *prog)
 {
+	pthread_mutex_t	*fork;
 	size_t			i;
 
 	i = 0;
-	prog->fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
+	fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
+	prog->fork = fork;
 	if (!prog->fork)
 		return ;
 	while (i < prog->nphilo)
@@ -65,13 +68,14 @@ void	philo_init(t_prog *prog)
 	{
 		prog->philo[i].id = i + 1;
 		prog->philo[i].eat_count = 0;
-		prog->philo[i].status = &prog->status;
 		prog->philo[i].eat_time = prog->eat_time;
 		prog->philo[i].sleep_time = prog->sleep_time;
 		prog->philo[i].die_time = prog->die_time;
 		prog->philo[i].max_eat = prog->max_eat;
-		prog->philo[i].print = prog->print;
-		prog->philo[i].start_time = get_current_time();
+		prog->philo[i].status = &prog->status;
+		prog->philo[i].print = &prog->print;
+		prog->philo[i].start_time = prog->start_time;
+		prog->philo[i].last_eat = prog->start_time;
 		i++;
 	}
 }
