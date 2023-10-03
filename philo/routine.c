@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 12:24:11 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:33:57 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ void	*routine(void *var)
 		ft_sleep(2);
 	while (1)
 	{
+		if (philo->nphilo == 1)
+		{
+			ft_sleep(philo->die_time);
+			return (var);
+		}
 		eat(philo);
 		nap(philo);
 		think(philo);

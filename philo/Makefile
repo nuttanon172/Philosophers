@@ -2,8 +2,7 @@ NAME	=	philo
 
 CC	=	cc
 
-#CFLAGS	=	-Wall -Wextra -Werror -pthread
-CFLAGS	=	-pthread -fsanitize=address -g
+CFLAGS	=	-Wall -Wextra -Werror -pthread
 
 SRCS	=	action.c \
 			ft_free.c \

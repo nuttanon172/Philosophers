@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 12:26:02 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 14:58:07 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef struct s_philo
 {
+	size_t			nphilo;
 	pthread_t		thread;
 	int				*status;
 	int				id;
@@ -80,4 +81,6 @@ size_t	ft_atost(const char *nptr);
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 
+/* ft_free */
+void	exit_free(t_prog *prog);
 #endif

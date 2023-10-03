@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 12:27:16 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/03 15:03:11 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	philo_init(t_prog *prog)
 		return ;
 	while (i < prog->nphilo)
 	{
+		prog->philo[i].nphilo = prog->nphilo;
 		prog->philo[i].id = i + 1;
 		prog->philo[i].eat_count = 0;
 		prog->philo[i].eat_time = prog->eat_time;
