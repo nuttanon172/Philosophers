@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 14:00:44 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:08:53 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	prog_init(t_prog *prog, int ac, char **av)
 	if (ac > 5)
 		prog->max_eat = (int)ft_atost(av[5]);
 	if (!prog->die_time || !prog->eat_time || !prog->sleep_time || \
-	!prog->max_eat)
+		!prog->max_eat || !prog->nphilo)
 		return (0);
 	if (pthread_mutex_init(&prog->eat, NULL) != 0)
 		return (0);
@@ -34,34 +34,6 @@ int	prog_init(t_prog *prog, int ac, char **av)
 	if (pthread_mutex_init(&prog->print, NULL) != 0)
 		return (pthread_mutex_destroy(&prog->eat), \
 			pthread_mutex_destroy(&prog->die), 0);
-	return (1);
-}
-
-int	fork_init(t_prog *prog)
-{
-	pthread_mutex_t	*fork;
-	size_t			i;
-
-	i = 0;
-	fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
-	prog->fork = fork;
-	if (!prog->fork)
-		return (0);
-	while (i < prog->nphilo)
-	{
-		if (pthread_mutex_init(&prog->fork[i++], NULL) != 0)
-			return (free(prog->fork), 0);
-	}
-	i = 0;
-	while (i < prog->nphilo)
-	{
-		prog->philo[i].r_fork = &prog->fork[i];
-		if (i == prog->nphilo - 1)
-			prog->philo[i].l_fork = &prog->fork[0];
-		else
-			prog->philo[i].l_fork = &prog->fork[i + 1];
-		i++;
-	}
 	return (1);
 }
 
@@ -88,6 +60,34 @@ int	philo_init(t_prog *prog)
 		prog->philo[i].print = &prog->print;
 		prog->philo[i].eat = &prog->eat;
 		prog->philo[i].die = &prog->die;
+		i++;
+	}
+	return (1);
+}
+
+int	fork_init(t_prog *prog)
+{
+	pthread_mutex_t	*fork;
+	size_t			i;
+
+	i = 0;
+	fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
+	prog->fork = fork;
+	if (!prog->fork)
+		return (0);
+	while (i < prog->nphilo)
+	{
+		if (pthread_mutex_init(&prog->fork[i++], NULL) != 0)
+			return (0);
+	}
+	i = 0;
+	while (i < prog->nphilo)
+	{
+		prog->philo[i].r_fork = &prog->fork[i];
+		if (i == prog->nphilo - 1)
+			prog->philo[i].l_fork = &prog->fork[0];
+		else
+			prog->philo[i].l_fork = &prog->fork[i + 1];
 		i++;
 	}
 	return (1);

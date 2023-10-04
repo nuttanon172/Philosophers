@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:32:09 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:04:26 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ int		dead_check(t_philo *philo);
 
 /* ft_free */
 void	exit_free(t_prog *prog);
+void	destroy_mutex(t_prog *prog);
 
 #endif

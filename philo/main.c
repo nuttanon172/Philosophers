@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:59:30 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:38:32 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 15:09:51 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,13 @@ int	main(int ac, char **av)
 	if (!prog_init(&prog, ac, av))
 		return (ft_putstr_fd("Error: Program Init error\n", 2), EXIT_FAILURE);
 	if (!philo_init(&prog))
-		return (pthread_mutex_destroy(&prog.print), \
-			ft_putstr_fd("Error: Philo init error\n", 2), EXIT_FAILURE);
+		return (destroy_mutex(&prog), \
+		ft_putstr_fd("Error: Philo init error\n", 2), EXIT_FAILURE);
 	if (prog.nphilo > 1)
 	{
 		if (!fork_init(&prog))
 		{
-			pthread_mutex_destroy(&prog.print);
+			exit_free(&prog);
 			return (ft_putstr_fd("Error: Fork init error\n", 2), EXIT_FAILURE);
 		}
 	}
