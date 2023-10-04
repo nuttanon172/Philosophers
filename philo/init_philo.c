@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:36:26 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:00:44 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ int	thread_init(t_prog *prog)
 			&routine, &prog->philo[i]) != 0)
 			return (0);
 		i++;
+		usleep(10);
 	}
-	if (pthread_join(&prog->inspector, NULL) != 0)
+	if (pthread_join(prog->inspector, NULL) != 0)
 		return (0);
 	i = 0;
 	while (i < prog->nphilo)

@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:19:25 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:06:57 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ void	*monitor(void *var)
 	t_prog	*prog;
 
 	prog = (t_prog *)var;
-	ft_sleep(prog->nphilo * prog->nphilo);
 	while (1)
 	{
+		usleep(1);
 		if (ft_isdie(prog))
 			break ;
 		if (full_eat(prog))
