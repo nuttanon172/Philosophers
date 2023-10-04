@@ -6,15 +6,22 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:28:44 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 16:44:33 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 02:53:21 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+int	ft_isdead(t_philo *philo)
+{
+	pthread_mutex_lock(philo->die);
+	if (!*philo->status)
+		return (pthread_mutex_unlock(philo->die), 1);
+	return (pthread_mutex_unlock(philo->die), 0);
+}
+
 void	print(t_philo *philo, char *str, char *color)
 {
-	usleep(2);
 	pthread_mutex_lock(philo->print);
 	if (*philo->status)
 	{
@@ -26,15 +33,19 @@ void	print(t_philo *philo, char *str, char *color)
 
 void	eat(t_philo *philo)
 {
-	if (!*philo->status || (philo->eat_count == philo->max_eat))
+	if (ft_isdead(philo) || (philo->eat_count == philo->max_eat))
 		return ;
 	pthread_mutex_lock(philo->r_fork);
 	print(philo, "has taken a fork", GREEN);
 	pthread_mutex_lock(philo->l_fork);
 	print(philo, "has taken a fork", GREEN);
+	pthread_mutex_lock(philo->eat);
 	philo->eat_count += 1;
+	pthread_mutex_unlock(philo->eat);
+	pthread_mutex_lock(philo->die);
 	print(philo, "is eating", GREEN);
 	philo->last_eat = timestamp();
+	pthread_mutex_unlock(philo->die);
 	ft_sleep(philo->eat_time);
 	pthread_mutex_unlock(philo->r_fork);
 	pthread_mutex_unlock(philo->l_fork);
@@ -42,7 +53,7 @@ void	eat(t_philo *philo)
 
 void	nap(t_philo *philo)
 {
-	if (!*philo->status)
+	if (ft_isdead(philo))
 		return ;
 	print(philo, "is sleeping", BLUE);
 	ft_sleep(philo->sleep_time);
@@ -50,7 +61,7 @@ void	nap(t_philo *philo)
 
 void	think(t_philo *philo)
 {
-	if (!*philo->status)
+	if (ft_isdead(philo))
 		return ;
 	print(philo, "is thinking", YELLOW);
 }

@@ -2,7 +2,7 @@ NAME	=	philo
 
 CC	=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread
+CFLAGS	=	-Wall -Wextra -Werror -pthread -fsanitize=thread -g
 
 SRCS	=	action.c \
 			ft_free.c \
@@ -10,7 +10,8 @@ SRCS	=	action.c \
 			init_philo.c \
 			main.c \
 			routine.c \
-			utils.c
+			utils.c \
+			lock.c
 
 DIR_INC	=	include
 DIR_SRC	=	src

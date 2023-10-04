@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_free.c                                          :+:      :+:    :+:   */
+/*   lock.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/01 14:18:54 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 03:11:47 by ntairatt         ###   ########.fr       */
+/*   Created: 2023/10/04 02:29:50 by ntairatt          #+#    #+#             */
+/*   Updated: 2023/10/04 02:39:58 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	exit_free(t_prog *prog)
+int	eat_check(t_philo *philo)
 {
-	size_t	i;
+	pthread_mutex_lock(philo->eat);
+	if (philo->eat_count == philo->max_eat)
+		return (pthread_mutex_unlock(philo->eat), 1);
+	return (pthread_mutex_unlock(philo->eat), 0);
+}
 
-	i = 0;
-	pthread_mutex_destroy(&prog->print);
-	pthread_mutex_destroy(&prog->eat);
-	pthread_mutex_destroy(&prog->die);
-	if (prog->nphilo > 1)
-	{
-		while (i < prog->nphilo)
-			pthread_mutex_destroy(&prog->fork[i++]);
-		free(prog->fork);
-	}
-	i = 0;
-	if (prog->philo)
-	{
-		free(prog->philo);
-		prog->philo = NULL;
-	}
+int	dead_check(t_philo *philo)
+{
+	pthread_mutex_lock(philo->die);
+	if (timestamp() - philo->last_eat >= philo->die_time)
+		return (pthread_mutex_unlock(philo->die), 1);
+	return (pthread_mutex_unlock(philo->die), 0);
 }

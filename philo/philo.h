@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 15:34:14 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 02:40:18 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_philo
 	size_t			sleep_time;
 	size_t			die_time;
 	size_t			start_time;
+	pthread_mutex_t	*die;
+	pthread_mutex_t	*eat;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*print;
@@ -52,6 +54,8 @@ typedef struct s_prog
 	size_t			sleep_time;
 	size_t			die_time;
 	t_philo			*philo;
+	pthread_mutex_t	eat;
+	pthread_mutex_t	die;
 	pthread_mutex_t	print;
 	pthread_mutex_t	*fork;
 }				t_prog;
@@ -71,6 +75,7 @@ size_t	timestamp(void);
 void	ft_sleep(size_t millisec);
 
 /* action */
+int		ft_isdead(t_philo *philo);
 void	print(t_philo *philo, char *str, char *color);
 void	eat(t_philo *philo);
 void	nap(t_philo *philo);
@@ -80,6 +85,10 @@ void	think(t_philo *philo);
 size_t	ft_atost(const char *nptr);
 size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
+
+/* lock */
+int	eat_check(t_philo *philo);
+int	dead_check(t_philo *philo);
 
 /* ft_free */
 void	exit_free(t_prog *prog);

@@ -27,6 +27,8 @@ int	prog_init(t_prog *prog, int ac, char **av)
 	if (!prog->die_time || !prog->eat_time || !prog->sleep_time || \
 	!prog->max_eat)
 		return (0);
+	pthread_mutex_init(&prog->eat, NULL);
+	pthread_mutex_init(&prog->die, NULL);
 	return (1);
 }
 
@@ -75,10 +77,12 @@ int	philo_init(t_prog *prog)
 		prog->philo[i].sleep_time = prog->sleep_time;
 		prog->philo[i].die_time = prog->die_time;
 		prog->philo[i].max_eat = prog->max_eat;
-		prog->philo[i].status = &prog->status;
-		prog->philo[i].print = &prog->print;
 		prog->philo[i].start_time = prog->start_time;
 		prog->philo[i].last_eat = prog->start_time;
+		prog->philo[i].status = &prog->status;
+		prog->philo[i].print = &prog->print;
+		prog->philo[i].eat = &prog->eat;
+		prog->philo[i].die = &prog->die;
 		i++;
 	}
 	return (1);
