@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:12:01 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:32:09 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef struct s_philo
 {
-	size_t			nphilo;
 	pthread_t		thread;
+	size_t			nphilo;
 	int				*status;
 	int				id;
 	int				eat_count;
@@ -46,6 +46,7 @@ typedef struct s_philo
 
 typedef struct s_prog
 {
+	pthread_t		inspector;
 	size_t			nphilo;
 	int				max_eat;
 	int				status;
@@ -87,8 +88,8 @@ size_t	ft_strlen(const char *s);
 void	ft_putstr_fd(char *s, int fd);
 
 /* lock */
-int	eat_check(t_philo *philo);
-int	dead_check(t_philo *philo);
+int		eat_check(t_philo *philo);
+int		dead_check(t_philo *philo);
 
 /* ft_free */
 void	exit_free(t_prog *prog);

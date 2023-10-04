@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:59:30 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:03:40 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:38:32 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,11 @@ int	main(int ac, char **av)
 
 	if (ac < 5 || ac > 6 || av_check(ac, av))
 		return (ft_putstr_fd("Error: Input error\n", 2), EXIT_FAILURE);
-	prog_init(&prog, ac, av);
-	if (pthread_mutex_init(&prog.print, NULL) != 0)
-		return (ft_putstr_fd("Error: Print init error\n", 2), EXIT_FAILURE);
+	if (!prog_init(&prog, ac, av))
+		return (ft_putstr_fd("Error: Program Init error\n", 2), EXIT_FAILURE);
 	if (!philo_init(&prog))
-	{
 		return (pthread_mutex_destroy(&prog.print), \
-			ft_putstr_fd("Error: Philo init error\n", 2), 1);
-	}
+			ft_putstr_fd("Error: Philo init error\n", 2), EXIT_FAILURE);
 	if (prog.nphilo > 1)
 	{
 		if (!fork_init(&prog))

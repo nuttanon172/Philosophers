@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 11:37:20 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:36:26 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,13 @@ int	prog_init(t_prog *prog, int ac, char **av)
 	if (!prog->die_time || !prog->eat_time || !prog->sleep_time || \
 	!prog->max_eat)
 		return (0);
-	pthread_mutex_init(&prog->eat, NULL);
-	pthread_mutex_init(&prog->die, NULL);
+	if (pthread_mutex_init(&prog->eat, NULL) != 0)
+		return (0);
+	if (pthread_mutex_init(&prog->die, NULL) != 0)
+		return (pthread_mutex_destroy(&prog->eat), 0);
+	if (pthread_mutex_init(&prog->print, NULL) != 0)
+		return (pthread_mutex_destroy(&prog->eat), \
+			pthread_mutex_destroy(&prog->die), 0);
 	return (1);
 }
 
@@ -90,10 +95,9 @@ int	philo_init(t_prog *prog)
 
 int	thread_init(t_prog *prog)
 {
-	pthread_t	inspector;
 	size_t		i;
 
-	if (pthread_create(&inspector, NULL, \
+	if (pthread_create(&prog->inspector, NULL, \
 		&monitor, prog) != 0)
 		return (0);
 	i = 0;
@@ -104,9 +108,9 @@ int	thread_init(t_prog *prog)
 			return (0);
 		i++;
 	}
-	i = 0;
-	if (pthread_join(inspector, NULL) != 0)
+	if (pthread_join(&prog->inspector, NULL) != 0)
 		return (0);
+	i = 0;
 	while (i < prog->nphilo)
 		if (pthread_join(prog->philo[i++].thread, NULL) != 0)
 			return (0);
