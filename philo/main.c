@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/03 15:59:30 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 16:47:13 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:03:40 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int	main(int ac, char **av)
 	}
 	if (!thread_init(&prog))
 		ft_putstr_fd("Error: Thread init error\n", 2);
-	ft_sleep(5);
 	exit_free(&prog);
 	return (EXIT_SUCCESS);
 }

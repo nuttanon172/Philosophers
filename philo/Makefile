@@ -2,7 +2,9 @@ NAME	=	philo
 
 CC	=	cc
 
-CFLAGS	=	-Wall -Wextra -Werror -pthread -fsanitize=thread -g
+CFLAGS	=	-Wall -Wextra -Werror -pthread
+
+OBJS	=	$(SRCS:.c=.o)
 
 SRCS	=	action.c \
 			ft_free.c \
@@ -18,18 +20,18 @@ DIR_SRC	=	src
 
 RM	=	rm -rf
 
-$(NAME):
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 .PHONY: all clean fclean re norm
 all: $(NAME)
 
 clean:
-		@$(RM) $(NAME)
+		@$(RM) $(OBJS)
 		@echo "Philo has Removed"
 
 fclean:
-		@$(RM) $(NAME)
+		@$(RM) $(OBJS) $(NAME)
 		@echo "Philo has Removed"
 
 re: fclean all

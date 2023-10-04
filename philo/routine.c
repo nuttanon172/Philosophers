@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/01 14:18:20 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 02:41:01 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:01:47 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	*routine(void *var)
 		ft_sleep(2);
 	while (1)
 	{
+		if (ft_isdead(philo) || (philo->eat_count == philo->max_eat))
+			break ;
 		if (philo->nphilo == 1)
 		{
 			ft_sleep(philo->die_time);
@@ -82,8 +84,6 @@ void	*routine(void *var)
 		eat(philo);
 		nap(philo);
 		think(philo);
-		if (ft_isdead(philo) || (philo->eat_count == philo->max_eat))
-			break ;
 	}
 	return (0);
 }

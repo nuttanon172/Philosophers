@@ -6,17 +6,17 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 02:40:18 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 12:12:01 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# define RED	"\x1b[31m"
-# define GREEN	"\x1b[32m"
-# define YELLOW	"\x1b[33m"
-# define BLUE	"\x1b[34m"
+# define RED	"\x1b[31;1m"
+# define GREEN	"\x1b[32;1m"
+# define YELLOW	"\x1b[33;1m"
+# define BLUE	"\x1b[34;1m"
 
 # include <pthread.h>
 # include <stdio.h>
@@ -92,4 +92,5 @@ int	dead_check(t_philo *philo);
 
 /* ft_free */
 void	exit_free(t_prog *prog);
+
 #endif

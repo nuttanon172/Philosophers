@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:41:28 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/03 11:42:53 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/10/04 11:50:47 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_sleep(size_t millisec)
 
 	start = timestamp();
 	while (timestamp() - start < millisec)
-		usleep(1);
+		usleep(0);
 }
 
 size_t	timestamp(void)
