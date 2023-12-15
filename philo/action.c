@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 18:28:44 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 12:11:30 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/12/15 16:24:44 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,15 @@ void	eat(t_philo *philo)
 
 void	nap(t_philo *philo)
 {
+	if (philo->eat_count == philo->max_eat)
+		return ;
 	print(philo, "is sleeping", BLUE);
 	ft_sleep(philo->sleep_time);
 }
 
 void	think(t_philo *philo)
 {
+	if (philo->eat_count == philo->max_eat)
+		return ;
 	print(philo, "is thinking", YELLOW);
 }
