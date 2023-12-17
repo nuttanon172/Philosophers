@@ -6,7 +6,7 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/29 17:51:47 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 15:08:53 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/12/17 13:04:23 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,22 +72,21 @@ int	fork_init(t_prog *prog)
 
 	i = 0;
 	fork = (pthread_mutex_t *)malloc(prog->nphilo * sizeof(pthread_mutex_t));
-	prog->fork = fork;
-	if (!prog->fork)
+	if (!fork)
 		return (0);
+	prog->fork = fork;
 	while (i < prog->nphilo)
 	{
 		if (pthread_mutex_init(&prog->fork[i++], NULL) != 0)
 			return (0);
 	}
+	prog->philo[prog->nphilo - 1].r_fork = &prog->fork[prog->nphilo - 1];
+	prog->philo[prog->nphilo - 1].l_fork = &prog->fork[0];
 	i = 0;
-	while (i < prog->nphilo)
+	while (i < prog->nphilo - 1)
 	{
 		prog->philo[i].r_fork = &prog->fork[i];
-		if (i == prog->nphilo - 1)
-			prog->philo[i].l_fork = &prog->fork[0];
-		else
-			prog->philo[i].l_fork = &prog->fork[i + 1];
+		prog->philo[i].l_fork = &prog->fork[i + 1];
 		i++;
 	}
 	return (1);

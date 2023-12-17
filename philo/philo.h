@@ -6,17 +6,18 @@
 /*   By: ntairatt <ntairatt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/24 17:46:29 by ntairatt          #+#    #+#             */
-/*   Updated: 2023/10/04 15:04:26 by ntairatt         ###   ########.fr       */
+/*   Updated: 2023/12/17 13:06:22 by ntairatt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# define RED	"\x1b[31;1m"
-# define GREEN	"\x1b[32;1m"
-# define YELLOW	"\x1b[33;1m"
-# define BLUE	"\x1b[34;1m"
+# define RED		"\x1b[31;1m"
+# define GREEN		"\x1b[32;1m"
+# define YELLOW		"\x1b[33;1m"
+# define BLUE		"\x1b[34;1m"
+# define DEFAULT	"\033[0m"
 
 # include <pthread.h>
 # include <stdio.h>
