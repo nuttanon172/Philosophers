@@ -36,17 +36,14 @@ void	eat(t_philo *philo)
 	if (philo->id % 2 == 0)
 	{
 		pthread_mutex_lock(philo->r_fork);
-		print(philo, "has taken a fork", GREEN);
 		pthread_mutex_lock(philo->l_fork);
-		print(philo, "has taken a fork", GREEN);
 	}
 	else
 	{
 		pthread_mutex_lock(philo->l_fork);
-		print(philo, "has taken a fork", GREEN);
 		pthread_mutex_lock(philo->r_fork);
-		print(philo, "has taken a fork", GREEN);
 	}
+	print(philo, "has taken a fork", GREEN);
 	pthread_mutex_lock(philo->eat);
 	philo->eat_count += 1;
 	pthread_mutex_unlock(philo->eat);
